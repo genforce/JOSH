@@ -13,8 +13,9 @@ const config = {
   },
 };
 
-if ("REPOSITORY" in process.env) {
-  config.base = `/${process.env.REPOSITORY}/`;
-}
+ 
+config.base = `/JOSH/`;
+ 
 
 export default config;
+

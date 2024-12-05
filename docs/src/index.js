@@ -1,6 +1,6 @@
 import { WebViewer } from "@rerun-io/web-viewer";
 
-const rrdUrl = "https://app.rerun.io/version/0.20.3/examples/arkit_scenes.rrd";
+const rrdUrl = "../JOSH/recordings/test_demo_2.rrd";
 const parentElement = document.getElementById("viewer-container");
 
 const viewer = new WebViewer();
