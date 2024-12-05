@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+
+<!-- === Header Starts === -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Project Page Template</title>
+
+  <link href="./assets/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/font.css" rel="stylesheet" type="text/css">
+  <link href="./assets/style.css" rel="stylesheet" type="text/css">
+</head>
+<!-- === Header Ends === -->
+
+
+<body>
+
+<!-- === Home Section Starts === -->
+<div class="section">
+  <!-- === Title Starts === -->
+  <div class="header">
+    <div class="logo">
+      <a href="https://genforce.github.io/" target="_blank"><img src="./assets/genforce.png"></a>
+    </div>
+    <div class="title" style="padding-top: 25pt;">  <!-- Set padding as 10 if title is with two lines. -->
+      Project Title (or Paper Title)
+    </div>
+  </div>
+  <!-- === Title Ends === -->
+  <div class="author">
+    <a href="#" target="_blank">Author 1</a>&nbsp;
+    <a href="#" target="_blank">Author 2</a>&nbsp;
+    <a href="#" target="_blank">Author 3</a>
+  </div>
+  <div class="institution">
+    Institution
+  </div>
+  <div class="link">
+    <a href="#" target="_blank">[Paper]</a>&nbsp;
+    <a href="#" target="_blank">[Code]</a>
+  </div>
+  <div class="teaser">
+    <img src="https://via.placeholder.com/300x100">
+  </div>
+</div>
+<!-- === Home Section Ends === -->
+<div id="viewer-container"></div>
+<script type="module" src="./src/index.js"></script>
+
+<!-- === Overview Section Starts === -->
+<div class="section">
+  <div class="title">Overview</div>
+  <div class="body">
+    Simple description of the project. Please don't directly copy and paste the abstract.
+    Make the brief summary of your work in layman English, and explain why it is interesting and important.
+  </div>
+</div>
+<!-- === Overview Section Ends === -->
+
+
+<!-- === Result Section Starts === -->
+<div class="section">
+  <div class="title">Results</div>
+  <div class="body">
+    Image or GIF results here. The highlight of the work.
+
+    <!-- Adjust the number of rows and columns (EVERY project differs). -->
+    <table width="100%" style="margin: 20pt 0; text-align: center;">
+      <tr>
+        <td><img src="https://via.placeholder.com/300x100" width="90%"></td>
+      </tr>
+    </table>
+
+    Demo video here.
+
+    <!-- Adjust the frame size based on the demo (EVERY project differs). -->
+    <div style="position: relative; padding-top: 50%; margin: 20pt 0; text-align: center;">
+      <iframe src="https://via.placeholder.com/900x450" frameborder=0
+              style="position: absolute; top: 2.5%; left: 2.5%; width: 95%; height: 100%;"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+<!-- === Result Section Ends === -->
+
+
+<!-- === Reference Section Starts === -->
+<div class="section">
+  <div class="bibtex">BibTeX</div>
+<pre>
+@article{alias,
+  title   = {},
+  author  = {},
+  journal = {},
+  year    = {}
+}
+</pre>
+
+  <!-- BZ: we should give other related work enough credits, -->
+  <!--     so please include some most relevant work and leave some comment to summarize work and the difference. -->
+  <div class="ref">Related Work</div>
+  <div class="citation">
+    <div class="image"><img src="https://via.placeholder.com/300x100"></div>
+    <div class="comment">
+      <a href="#" target="_blank">
+        Authors.
+        Paper Title.
+        Conference Name & Year.</a><br>
+      <b>Comment:</b>
+      This is a short comment.
+    </div>
+  </div>
+  <div class="citation">
+    <div class="image"><img src="https://via.placeholder.com/300x100"></div>
+    <div class="comment">
+      <a href="#" target="_blank">
+        Authors.
+        Paper Title.
+        Conference Name & Year.</a><br>
+      <b>Comment:</b>
+      This is a long comment. This comment is just used to test how long comments can fit the template.
+    </div>
+  </div>
+</div>
+<!-- === Reference Section Ends === -->
+
+
+</body>
+</html>
