@@ -6,10 +6,10 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <title>Project Page Template</title>
+  <title>JOSH</title>
 
-  <script type="module" crossorigin src="/JOSH-project-page/assets/index-DHnyNMt0.js"></script>
-  <link rel="stylesheet" crossorigin href="/JOSH-project-page/assets/index-fappBC7u.css">
+  <script type="module" crossorigin src="/JOSH-webpage/assets/index-C3_DepMg.js"></script>
+  <link rel="stylesheet" crossorigin href="/JOSH-webpage/assets/index-BjdEVPRq.css">
 </head>
 <!-- === Header Ends === -->
 
@@ -21,65 +21,106 @@
   <!-- === Title Starts === -->
   <div class="header">
     <div class="logo">
-      <a href="https://genforce.github.io/" target="_blank"><img src="/JOSH-project-page/assets/genforce-Ds5Qv1Rt.png"></a>
+      <a href="https://genforce.github.io/" target="_blank"><img src="/JOSH-webpage/assets/genforce-D3nu1qs5.png"></a>
     </div>
     <div class="title" style="padding-top: 25pt;">  <!-- Set padding as 10 if title is with two lines. -->
-      Project Title (or Paper Title)
+      Joint Optimization for 4D Human-Scene Reconstruction in the Wild
     </div>
   </div>
   <!-- === Title Ends === -->
   <div class="author">
-    <a href="#" target="_blank">Author 1</a>&nbsp;
-    <a href="#" target="_blank">Author 2</a>&nbsp;
-    <a href="#" target="_blank">Author 3</a>
+    <a href="https://scholar.google.com/citations?user=Asc7j9oAAAAJ&hl=en" target="_blank">Zhizheng Liu</a>&nbsp;, 
+    <a href="https://github.com/joe-lin-tech" target="_blank">Joe Lin</a>&nbsp;,
+    <a href="https://wywu.github.io/" target="_blank">Wayne Wu</a>&nbsp;,
+    <a href="https://boleizhou.github.io/" target="_blank">Bolei Zhou</a>
   </div>
   <div class="institution">
-    Institution
+    University of California, Los Angeles
   </div>
   <div class="link">
     <a href="#" target="_blank">[Paper]</a>&nbsp;
-    <a href="#" target="_blank">[Code]</a>
+    <a href="https://github.com/genforce/JOSH" target="_blank">[Code]</a>
   </div>
   <div class="teaser">
-    <img src="https://via.placeholder.com/300x100">
+    <img src="/JOSH-webpage/assets/teaser-DH_ZweB3.jpg">
   </div>
 </div>
 <!-- === Home Section Ends === -->
-<div id="viewer-container"></div>
+<div id="viewer-container"> 
+  <div class="title">Interactive Demos</div>
+</div>
 
 <!-- === Overview Section Starts === -->
 <div class="section">
   <div class="title">Overview</div>
   <div class="body">
-    Simple description of the project. Please don't directly copy and paste the abstract.
-    Make the brief summary of your work in layman English, and explain why it is interesting and important.
+  We aim to capture human-scene interactions in the wild by reconstructing both the 4D global human motion and the 3D scene from monocular videos. We propose a novel method
+  JOSH (<u>J</u>oint <u>O</u>ptimization of <u>S</u>cene  Geometry and <u>H</u>uman Motion)  that jointly optimizes motion and scene 
+  with the human-scene contact constraints. We further propose an efficient model variant, JOSH3R, to estimate human-scene 
+  reconstruction in real-time, greatly expediting web video processing. Experiment results show that JOSH achieves better 
+  accuracy for both global human motion estimation and dense scene reconstruction than other methods.
+  </div>
+
+  <div class="teaser">
+    <img src="/JOSH-webpage/assets/method-D3CcHeIK.jpg">
   </div>
 </div>
+
 <!-- === Overview Section Ends === -->
 
 
 <!-- === Result Section Starts === -->
 <div class="section">
-  <div class="title">Results</div>
+  <div class="title">Results on Datasets</div>
+  <div style="text-align: center;">
+  Evaluation on Global Human Motion Estimation with the EMDB Dataset
+  </div>
   <div class="body">
-    Image or GIF results here. The highlight of the work.
-
-    <!-- Adjust the number of rows and columns (EVERY project differs). -->
-    <table width="100%" style="margin: 20pt 0; text-align: center;">
-      <tr>
-        <td><img src="https://via.placeholder.com/300x100" width="90%"></td>
-      </tr>
-    </table>
-
-    Demo video here.
-
     <!-- Adjust the frame size based on the demo (EVERY project differs). -->
-    <div style="position: relative; padding-top: 50%; margin: 20pt 0; text-align: center;">
-      <iframe src="https://via.placeholder.com/900x450" frameborder=0
-              style="position: absolute; top: 2.5%; left: 2.5%; width: 95%; height: 100%;"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+    <div style="position: relative; padding-top: 50.25%; margin: 0pt 0; text-align: center;">
+      <video muted playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
+          <source src="/JOSH-webpage/assets/dataset_1-BPl-oppn.mov" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+  </div>
+  </div>
+  <div style="text-align: center;">
+    Evaluation on Global Camera Trajectory Estimation with the SLOPER4D Dataset
     </div>
+    <div class="body">
+      <!-- Adjust the frame size based on the demo (EVERY project differs). -->
+      <div style="position: relative; padding-top: 40.25%; margin: 0pt 0; text-align: center;">
+        <video muted playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
+            <source src="/JOSH-webpage/assets/dataset_2-Vh3iZzzx.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    </div>
+    <div style="text-align: center;">
+      Evaluation on 4D Human-Scene Reconstruction with the RICH Dataset
+      </div>
+      <div class="body">
+        <!-- Adjust the frame size based on the demo (EVERY project differs). -->
+        <div style="position: relative; padding-top: 48.25%; margin: 0pt 0; text-align: center;">
+          <video muted playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
+              <source src="/JOSH-webpage/assets/dataset_3-DhHm1EVt.mov" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+      </div>
+</div>
+
+<div class="section">
+  <div class="title">Results on Web Videos</div>
+ 
+  <div class="body">
+    <!-- Adjust the frame size based on the demo (EVERY project differs). -->
+    <div style="position: relative; padding-top: 56.25%; margin: 0pt 0; text-align: center;">
+      <video autoplay muted playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
+          <source src="/JOSH-webpage/assets/in_the_wild-Ci_rDH50.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+  </div>
   </div>
 </div>
 <!-- === Result Section Ends === -->
@@ -101,25 +142,26 @@
   <!--     so please include some most relevant work and leave some comment to summarize work and the difference. -->
   <div class="ref">Related Work</div>
   <div class="citation">
-    <div class="image"><img src="https://via.placeholder.com/300x100"></div>
+    <div class="image"><img src="/JOSH-webpage/assets/pedgen-wcEJXiGT.gif"></div>
     <div class="comment">
-      <a href="#" target="_blank">
-        Authors.
-        Paper Title.
-        Conference Name & Year.</a><br>
+      <a href="https://genforce.github.io/PedGen/" target="_blank">
+        Zhizheng Liu, Joe Lin, Wayne Wu, Bolei Zhou.
+        Learning to Generate Diverse Pedestrian Movements from Web Videos with Noisy Labels.
+        Preprint (arXiv) , 2024.</a><br>
       <b>Comment:</b>
-      This is a short comment.
+       This work proposes a dataset and a model for context-aware pedestrian movement generation from pseudo-labels of web videos. We can use JOSH to 
+       extract human and scene labels with better quality for pedestrian movement generation.
     </div>
   </div>
   <div class="citation">
-    <div class="image"><img src="https://via.placeholder.com/300x100"></div>
+    <div class="image"><img src="/JOSH-webpage/assets/mast3r-CA05dMCk.jpg"></div>
     <div class="comment">
-      <a href="#" target="_blank">
-        Authors.
-        Paper Title.
-        Conference Name & Year.</a><br>
+      <a href="https://europe.naverlabs.com/research/publications/mast3r-sfm-a-fully-integrated-solution-for-unconstrained-structure-from-motion/" target="_blank">
+        Bardienus Duisterhof, Lojze Zust, Philippe Weinzaepfel, Vincent Leroy, Yohann Cabon, Jérome Revaud.
+        MASt3R-SfM: a fully-Integrated solution for unconstrained Structure-from-Motion.
+        Preprint (arXiv) , 2024.</a><br>
       <b>Comment:</b>
-      This is a long comment. This comment is just used to test how long comments can fit the template.
+      This work proposes an efficient and robust pipeline for dense scene reconstruction from an unconstrained collection of images. In our implementation of JOSH, we use its results as the initialization of the local scene reconstruction.
     </div>
   </div>
 </div>
