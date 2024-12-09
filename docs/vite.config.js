@@ -10,19 +10,12 @@ const config = {
   },
   server: {
     port: 5173,
-    proxy: {
-      '/api': {
-        target: 'https://web.cs.ucla.edu',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
   },
 };
 
 
  
-config.base = `/JOSH-project-page/`;
+config.base = `/JOSH-webpage/`;
  
 
 export default config;

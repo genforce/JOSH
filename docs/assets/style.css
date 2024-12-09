@@ -40,6 +40,12 @@ pre {
   height: 600px !important;
 }
 
+#viewer-container .title  {
+  text-align: center;
+  font-size: 22pt;
+  margin: 5pt 0 15pt 0;  /* top right bottom left */
+}
+
 /* Section */
 .section {
   width: 768pt;
