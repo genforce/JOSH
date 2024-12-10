@@ -24,27 +24,23 @@ pre {
 
 /* Project Page Style */
 
-#viewer-container {
-  width: 768pt;
-  min-height: 100pt;
-  margin: 15pt auto;
-  padding: 20pt 30pt;
-  border: 1pt hidden #000;
-  text-align: justify;
-  color: #000000;
-  background: #ffffff;
-}
-
-#viewer-container canvas {
+ 
+#demo1 canvas {
   width: 100% !important;
   height: 600px !important;
 }
 
-#viewer-container .title  {
-  text-align: center;
-  font-size: 22pt;
-  margin: 5pt 0 15pt 0;  /* top right bottom left */
+#demo2 canvas {
+  width: 100% !important;
+  height: 600px !important;
 }
+
+#demo3 canvas {
+  width: 100% !important;
+  height: 600px !important;
+}
+
+ 
 
 /* Section */
 .section {
