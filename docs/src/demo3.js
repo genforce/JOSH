@@ -1,6 +1,6 @@
 import { WebViewer } from "@rerun-io/web-viewer";
 
-const rrdUrl = "https://raw.githubusercontent.com/genforce/JOSH-webpage/main/recordings/demo_3.rrd";
+const rrdUrl = "https://raw.githubusercontent.com/genforce/JOSH/main/recordings/demo_3.rrd";
 const parentElement = document.getElementById("demo3");
 
 const viewer = new WebViewer();

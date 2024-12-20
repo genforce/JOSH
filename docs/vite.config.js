@@ -15,7 +15,7 @@ const config = {
 
 
  
-config.base = `/JOSH-webpage/`;
+config.base = `/JOSH/`;
  
 
 export default config;
