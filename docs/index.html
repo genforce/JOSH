@@ -42,16 +42,22 @@
     <a href="#" target="_blank">[Paper]</a>&nbsp;
     <a href="https://github.com/genforce/JOSH" target="_blank">[Code]</a>
   </div>
- 
+<!--  
     <b>TL;DR</b>: We propose a novel method <b>JOSH</b> for <b>4D Human-Scene Reconstruction in the wild</b>, which  jointly
     optimizes the <b>global human motion</b>, the <b>surrounding environment</b>, and the <b>camera poses</b> with coherent human-scene interaction given a web video captured from a single camera.
-  
-  <div class="teaser">
+   -->
+   <div style="position: relative; padding-top: 55.25%; margin: 0pt 0; text-align: center;">
+    <video muted autoplay playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
+        <source src="assets/demo.mov" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+  <!-- <div class="teaser">
     <img src="assets/teaser.jpg">
   </div>
   <div class="teaser">
     <img src="assets/demo.png">
-  </div>
+  </div> -->
 </div>
 <!-- === Home Section Ends === -->
 <!-- <div class="section">
@@ -72,10 +78,11 @@
 <div class="section">
   <div class="title">Overview</div>
   <div class="body">
-  We aim to capture human-scene interactions in the wild by reconstructing both the 4D global human motion and the 3D scene from monocular videos. We propose a novel method
-  <b>JOSH</b> (<u>J</u>oint <u>O</u>ptimization of <u>S</u>cene  Geometry and <u>H</u>uman Motion)  that uses local scene reconstruction and human mesh recovery as initialization and then jointly optimizes motion and scene 
-  with the <b>human-scene contact</b> constraints. We further propose an efficient model variant <b>JOSH3R</b>, which is trained only with <b>pseudo-labels of web videos annotated by JOSH</b>, to estimate human-scene 
-  reconstruction in real-time. JOSH achieves state-of-the-art performance for both global human motion estimation and dense scene reconstruction with joint optimization, while  JOSH3R outperforms other optimization-free methods.
+
+  We propose a novel method <b>JOSH</b> (<u>J</u>oint <u>O</u>ptimization of <u>S</u>cene  Geometry and <u>H</u>uman Motion)  for <b>4D Human-Scene Reconstruction in the wild</b>, which  jointly
+  optimizes the <b>global human motion</b>, the <b>surrounding environment</b>, and the <b>camera poses</b> with coherent human-scene interaction given a web video captured from a single camera.
+    JOSH uses local scene reconstruction and human mesh recovery as initialization and then jointly optimizes motion and scene 
+  with the <b>human-scene contact</b> constraints.  JOSH achieves state-of-the-art performance for both global human motion estimation and metric-scale scene reconstruction with joint optimization.
   </div>
 
   <div class="teaser">
@@ -132,39 +139,6 @@
       </div>
 </div>
 
-<div class="section">
-  <div class="title">Results on Web Videos</div>
-  JOSH can work with web videos to capture the diverse human motion and its scene background from the internet.
- 
-  <div class="body">
-    <!-- Adjust the frame size based on the demo (EVERY project differs). -->
-    <div style="position: relative; padding-top: 55.25%; margin: 0pt 0; text-align: center;">
-      <video muted autoplay playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
-          <source src="assets/demo_1.mov" type="video/mp4">
-          Your browser does not support the video tag.
-      </video>
-  </div>
-  </div>
- 
-    <div class="body">
-      <!-- Adjust the frame size based on the demo (EVERY project differs). -->
-      <div style="position: relative; padding-top: 50.25%; margin: 0pt 0; text-align: center;">
-        <video muted autoplay playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
-            <source src="assets/demo_2.mov" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-    </div>
-      <div class="body">
-        <!-- Adjust the frame size based on the demo (EVERY project differs). -->
-        <div style="position: relative; padding-top: 65.25%; margin: 0pt 0; text-align: center;">
-          <video  autoplay muted playsinline controls loop style="position: absolute; top: 0%; left: 0%; width: 100%; height: 100%;">
-              <source src="assets/demo_3.mov" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-      </div>
-      </div>
-</div>
 
 <!-- === Result Section Ends === -->
 <div class="section">
