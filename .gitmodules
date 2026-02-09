@@ -1,0 +1,15 @@
+[submodule "third_party/mast3r"]
+	path = third_party/mast3r
+	url = https://github.com/naver/mast3r
+[submodule "third_party/sam3"]
+	path = third_party/sam3
+	url = https://github.com/facebookresearch/sam3
+[submodule "third_party/pi3"]
+	path = third_party/pi3
+	url = git@github.com:yyfz/Pi3.git
+[submodule "third_party/tram"]
+	path = third_party/tram
+	url = git@github.com:yufu-wang/tram.git
+[submodule "third_party/deco"]
+	path = third_party/deco
+	url = git@github.com:sha2nkt/deco.git
