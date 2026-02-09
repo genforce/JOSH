@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import TypedDict
+from typing import Optional, TypedDict
 
 import numpy as np
 import torch
@@ -12,6 +12,7 @@ class JOSHConfig:
     output_folder: str = "josh"
     optimize_smpl: bool = True
     optimize_focal: bool = True
+    init_focal: Optional[float] = None
     optimize_depth: bool = False
     scale_loss_weight: float = 1.0
     prior_loss_weight: float = 100.0
@@ -20,18 +21,19 @@ class JOSHConfig:
     scene_graph: str = "window-10"
     opt_interval: int = 5
     start_frame: int = 0
-    max_frames: int = 50
+    max_frames: int = 21
     num_frames: int = 0
     img_idx: list = field(default_factory=list)
     conf_thres: float = 0.1
     use_depth_model: bool = True
     update_correspondences: bool = False
     depth_filter_ratio: float = 1.01
+    visualize_results: bool = True
 
 
 class OptimizedFrameResult(TypedDict):
     frame_idx: int
-    conf_hw: torch.Tensor
+    conf_hw: np.ndarray
     rgb_hw3: np.ndarray
     depth_hw: np.ndarray
     mask_hw: np.ndarray

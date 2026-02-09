@@ -23,7 +23,7 @@ from PIL import Image
 from tqdm import tqdm
 
 from josh.config import ImageDict, JOSHConfig, OptimizedResult
-from josh.joint_opt import joint_opt, scene_to_results_mast3r
+from josh.joint_opt import joint_opt, scene_to_results_josh
 from josh.utils.focal_utils import focal_to_intrinsics, recover_focal_shift
 from josh.utils.image_utils import (generate_colors, load_images_and_masks, load_images_as_tensor, make_pairs)
 
@@ -42,15 +42,16 @@ def log_optimized_result(optimized_result: OptimizedResult, parent_log_path: Pat
     )
 
     mesh = optimized_result.mesh
-    rr.log(
-        f"{parent_log_path}/mesh",
-        rr.Mesh3D(
-            vertex_positions=mesh.vertices,
-            vertex_colors=mesh.visual.vertex_colors,
-            triangle_indices=mesh.faces,
-        ),
-        static=True,
-    )
+    if mesh is not None:
+        rr.log(
+            f"{parent_log_path}/mesh",
+            rr.Mesh3D(
+                vertex_positions=mesh.vertices,
+                vertex_colors=mesh.visual.vertex_colors,
+                triangle_indices=mesh.faces,
+            ),
+            static=True,
+        )
 
     intrinsics = optimized_result.intrinsics
 
@@ -114,7 +115,7 @@ def log_optimized_result(optimized_result: OptimizedResult, parent_log_path: Pat
             )
 
 
-def inference(scene_model, depth_model, device, cfg: JOSHConfig) -> OptimizedResult:
+def inference(scene_model, device, cfg: JOSHConfig) -> OptimizedResult:
     """
     Perform inference using the Dust3r algorithm.
 
@@ -162,11 +163,12 @@ def inference(scene_model, depth_model, device, cfg: JOSHConfig) -> OptimizedRes
     mask_pairs: list[tuple[ImageDict, ImageDict]] = make_pairs(masks, scene_graph=cfg.scene_graph)
 
     W_OG, H_OG = Image.open(img_files[0]).size
-    old_focal = (W_OG**2 + H_OG**2)**0.5 * W / W_OG
+    old_focal = (W_OG**2 + H_OG**2)**0.5 * W / W_OG  # hardcoded as the default human focal from VIMO
 
     if cfg.use_depth_model:
         # running depth model
         print("Running depth model using PI3...")
+        depth_model = Pi3X.from_pretrained("yyfz233/Pi3X").to(device).eval()
         imgs_pi3 = load_images_as_tensor(new_file_list, interval=1).to(device)
         T, _, H_PI3, W_PI3 = imgs_pi3.shape
 
@@ -213,22 +215,28 @@ def inference(scene_model, depth_model, device, cfg: JOSHConfig) -> OptimizedRes
                                          cfg=cfg)
 
     # get the optimized result from the scene
-    optimized_result: OptimizedResult = scene_to_results_mast3r(scene, old_focal, all_human_img_idx, cfg)
+    optimized_result: OptimizedResult = scene_to_results_josh(scene, old_focal, all_human_img_idx, cfg)
 
     return optimized_result
 
 
 if __name__ == "__main__":
-    parser = ArgumentParser()
-    parser.add_argument("--input_folder", type=str, default="data/demo1")
-    args = parser.parse_args()
     cfg = JOSHConfig()
+    parser = ArgumentParser()
+    parser.add_argument("--input_folder", type=str, default=cfg.input_folder)
+    parser.add_argument("--start_frame", type=int, default=cfg.start_frame)
+    parser.add_argument("--num_frames", type=int, default=cfg.num_frames)
+    parser.add_argument("--visualize", action="store_true")
+
+    args = parser.parse_args()
     cfg.input_folder = args.input_folder
+    cfg.start_frame = args.start_frame
+    cfg.num_frames = args.num_frames
+    cfg.visualize_results = args.visualize
     device = "cuda" if torch.cuda.is_available() else "cpu"
     scene_model = AsymmetricMASt3R.from_pretrained("naver/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric").to(device).eval()
-    depth_model = Pi3X.from_pretrained("yyfz233/Pi3X").to(device).eval()
 
-    result = inference(scene_model=scene_model, depth_model=depth_model, device=device, cfg=cfg)
+    result = inference(scene_model=scene_model, device=device, cfg=cfg)
     save_result = {}
     save_result["eval_metrics"] = result.eval_metrics
     save_result["pred_cam"] = np.stack([x["pred_cam"] for x in result.frame_result], axis=0)
@@ -241,16 +249,17 @@ if __name__ == "__main__":
     result_file_name = os.path.join(cfg.input_folder, cfg.output_folder, "scene.pkl")
     joblib.dump(save_result, result_file_name)
 
-    rr.init("my_app")
-    rr.connect_grpc(url='rerun+http://127.0.0.1:9876/proxy')
-    blueprint = rrb.Blueprint(
-        rrb.Horizontal(rrb.Spatial3DView(origin=f"test"),),
-        collapse_panels=True,
-    )
-    rr.send_blueprint(blueprint)
-    log_optimized_result(result, "test", cfg)
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print("Ctrl-C received. Exiting.")
+    if cfg.visualize_results:
+        rr.init("my_app")
+        rr.connect_grpc(url='rerun+http://127.0.0.1:9876/proxy')
+        blueprint = rrb.Blueprint(
+            rrb.Horizontal(rrb.Spatial3DView(origin=f"test"),),
+            collapse_panels=True,
+        )
+        rr.send_blueprint(blueprint)
+        log_optimized_result(result, "test", cfg)
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print("Ctrl-C received. Exiting.")

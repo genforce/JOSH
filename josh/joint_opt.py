@@ -16,7 +16,7 @@ from josh.utils.mesh_utils import cat_meshes, pts3d_to_trimesh
 from josh.utils.rot_utils import (interpolate_se3, interpolate_so3, matrix_to_quaternion, matrix_to_rotation_6d, quaternion_to_matrix, rotation_6d_to_matrix)
 
 
-def scene_to_results_mast3r(scene: SparseGA, old_focal, all_smpl_img_idx, cfg: JOSHConfig) -> OptimizedResult:
+def scene_to_results_josh(scene: SparseGA, old_focal, all_smpl_img_idx, cfg: JOSHConfig) -> OptimizedResult:
     ### get camera parameters K and T
 
     world_T_cam_b44: np.ndarray = scene.get_im_poses().numpy(force=True)
@@ -113,6 +113,19 @@ def scene_to_results_mast3r(scene: SparseGA, old_focal, all_smpl_img_idx, cfg: J
                     pred_rotmat[frame, 1:] = final_body_pose[i - start_idx]
                     pred_trans[frame] = final_trans[i - start_idx]
             pred_shape = final_body_shape.detach().cpu().unsqueeze(0).repeat(pred_shape.shape[0], 1)
+
+        frame_mask = torch.logical_and(pred_smpl_dict['frame'] >= cfg.start_frame, pred_smpl_dict['frame'] < cfg.start_frame + cfg.num_frames)
+        pred_rotmat = pred_rotmat[frame_mask]
+        pred_shape = pred_shape[frame_mask]
+        pred_trans = pred_trans[frame_mask]
+        pred_frame = torch.tensor(pred_frame)[frame_mask]
+        pred_smpl_dict['pred_rotmat'] = pred_rotmat
+        pred_smpl_dict['pred_shape'] = pred_shape
+        pred_smpl_dict['pred_trans'] = pred_trans.unsqueeze(1)
+        pred_smpl_dict['frame'] = pred_frame
+        pred_frame = pred_frame.tolist()
+        np.save(smpl_file.replace("tram", cfg.output_folder), pred_smpl_dict)
+
         tt = lambda x: torch.Tensor(x).float()
         smpl = SMPL(model_path="data/smpl")
         pred_smpl = smpl(body_pose=pred_rotmat[:, 1:],
@@ -121,12 +134,7 @@ def scene_to_results_mast3r(scene: SparseGA, old_focal, all_smpl_img_idx, cfg: J
                          transl=pred_trans,
                          pose2rot=False,
                          default_smpl=True)
-        frame_mask = torch.logical_and(pred_smpl_dict['frame'] >= cfg.start_frame, pred_smpl_dict['frame'] < cfg.start_frame + cfg.num_frames)
-        pred_smpl_dict['pred_rotmat'] = pred_rotmat[frame_mask]
-        pred_smpl_dict['pred_shape'] = pred_shape[frame_mask]
-        pred_smpl_dict['pred_trans'] = pred_trans[frame_mask].unsqueeze(1)
-        pred_smpl_dict['frame'] = pred_smpl_dict['frame'][frame_mask]
-        np.save(smpl_file.replace("tram", cfg.output_folder), pred_smpl_dict)
+
         smpl_temp = smpl(betas=pred_shape.mean(0, keepdim=True))
         smpl_offset = smpl_temp.joints[0, 0]
 
@@ -138,10 +146,11 @@ def scene_to_results_mast3r(scene: SparseGA, old_focal, all_smpl_img_idx, cfg: J
         smpl_local_trans[:, :3, :3] = pred_rotmat[:, 0]
         smpl_local_trans[:, :3, 3] = pred_trans
 
-        smpl_global_trans = torch.einsum("bij, bjk->bik", torch.tensor(
-            pred_cam_torch[pred_frame],
-            device=smpl_local_trans.device,
-        ), smpl_local_trans)
+        smpl_global_trans = torch.einsum("bij, bjk->bik",
+                                         torch.tensor(
+                                             pred_cam_torch[pred_smpl_dict['frame'] - cfg.start_frame],
+                                             device=smpl_local_trans.device,
+                                         ), smpl_local_trans)
 
         init_trans = smpl_global_trans[0, :3, 3]
         delta_trans = smpl_global_trans[1:, :3, 3] - smpl_global_trans[:-1, :3, 3]
@@ -268,7 +277,10 @@ def joint_opt(imgs,
     confs = torch.stack([torch.load(pth)[0][2].mean() for pth in canonical_paths]).to(pps)
     weighting = confs / confs.sum()
 
-    new_focal = (weighting @ base_focals).item()
+    if cfg.init_focal is not None:
+        new_focal = cfg.init_focal
+    else:
+        new_focal = (weighting @ base_focals).item()
     init_K[0][0] = new_focal
     init_K[1][1] = new_focal
 

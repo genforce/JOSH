@@ -17,7 +17,7 @@ cd JOSH
 conda create -n josh python=3.10 -y # must use python 3.10 for chumpy compatibility
 conda activate josh
 ```
-### Installing Dependencies (We use Ubuntu 22.04 + CUDA 12.8):
+### Installing Dependencies (Tested with Ubuntu 22.04 + CUDA 12.8 + 24GB VRAM):
 ```
 # assume CUDA 12.8, install pytorch and packages
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
@@ -29,6 +29,7 @@ pip install -e .
 - Download SMPL body models (SMPL_MALE.pkl, SMPL_FEMALE.pkl, SMPL_NEUTRAL.pkl) at  [the official webpage](https://smpl.is.tue.mpg.de/index.html) and place then under `data/smpl` folder.
 - Download [VIMO checkpoint](https://drive.google.com/file/d/1fdeUxn_hK4ERGFwuksFpV_-_PHZJuoiW/view?usp=share_link)(vimo_checkpoint.pth.tar) for HMR and place it under `data/checkpoints`.
 - Download [DECO checkpoint](https://keeper.mpdl.mpg.de/f/6f2e2258558f46ceb269/?dl=1)(deco_best.pth) for contact estimation and place it under `data/checkpoints`.
+- Move the function `parse_chunks` from `third_party/tram/lib/pipeline/tools.py` to `third_party/tram/lib/models/hmr_vimo.py` so we don't install extra dependencies. 
 ## JOSH Demo
 Assume the demo video is located at `$input_folder/XXXX.mp4`, run the following:
 ```
@@ -45,6 +46,10 @@ With the default hyperparameters, you should get the following results after run
 ![demo1](assets/images/demo1.gif)
 ### [Demo 2](assets/demo2/video.mp4) Sample Output 
 ![demo2](assets/images/demo2.gif)
+
+### [Long Demo](assets/long_demo/video.mp4) Sample Output
+![demo3](assets/images/demo3.png)
+For long videos (>=200 frames), we apply chunk processing and then aggregate the chunk results by simply concatenating them (see [josh/aggregate_results.py](josh/aggregate_results.py)). We will leave global bundle adjustment to future work.
 
 ## JOSH3R Demo
 To be updated before the ICLR conference
