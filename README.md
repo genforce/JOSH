@@ -32,6 +32,7 @@ pip install -e .
 ## JOSH Demo
 Assume the demo video is located at `$input_folder/XXXX.mp4`, run the following:
 ```
+rerun --serve-grpc # in another terminal, for visualization
 bash josh_demo.sh $input_folder
 ```
 For example, run `bash josh_demo.sh assets/demo1`, we will store all the intermediate outputs as well as the final result under `$input_folder`.
