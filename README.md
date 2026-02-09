@@ -41,9 +41,9 @@ Compared to the original paper, we now support using the local point cloud from 
 
 Note that since JOSH is an optimization-based method, you may want to tune the hyper-parameters for the optimal performance (see [josh/config.py](josh/config.py)).
 With the default hyperparameters, you should get the following results after running the demos:
-### Demo 1 Sample Output
+### [Demo 1](assets/demo1/video.mp4) Sample Output 
 ![demo1](assets/images/demo1.gif)
-### Demo 2 Sample Output
+### [Demo 2](assets/demo2/video.mp4) Sample Output 
 ![demo2](assets/images/demo2.gif)
 
 ## JOSH3R Demo
