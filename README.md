@@ -52,8 +52,12 @@ With the default hyperparameters, you should get the following results after run
 For long videos (>=200 frames), we apply chunk processing and then aggregate the chunk results by simply concatenating them (see [josh/aggregate_results.py](josh/aggregate_results.py)). We will leave global bundle adjustment to future work.
 
 ## JOSH3R Demo
-To be updated before the ICLR conference
-
+Download the JOSH3R checkpoint from [this link](https://drive.google.com/file/d/1dlX4p1RfwFjuzjHr76SCl21QZAx1MLK4/view?usp=sharing) to $CKPT_PATH, then run the follows.
+```
+python josh/inference_josh3r.py --input_folder "$input_folder" --ckpt_path $CKPT_PATH  --visualize
+```
+Note that the scene reconstruction quality of JOSH3R may not be great due to the end-to-end inference of the base model MASt3R without optimization, 
+but the global human trajectory prediction should look more plausible. 
 ## Evaluation
 To be updated before the ICLR conference
 

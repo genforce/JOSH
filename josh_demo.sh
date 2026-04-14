@@ -6,7 +6,7 @@ mkdir -p "$rgb_dir"
 conda activate josh
 echo "Extracting frames from: $mp4 -> $rgb_dir"
 # write zero-padded 6-digit filenames starting at 000000.jpg
-ffmpeg -y -start_number 0 -i "$mp4"  "$rgb_dir/%06d.jpg"
+ffmpeg -y -i "$mp4" -start_number 0 "$rgb_dir/%06d.jpg"
 python -m preprocess.run_sam3 --input_folder $input_folder  
 python -m preprocess.run_tram --input_folder $input_folder  
 python -m preprocess.run_deco --input_folder $input_folder  
