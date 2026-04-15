@@ -52,15 +52,18 @@ With the default hyperparameters, you should get the following results after run
 For long videos (>=200 frames), we apply chunk processing and then aggregate the chunk results by simply concatenating them (see [josh/aggregate_results.py](josh/aggregate_results.py)). We will leave global bundle adjustment to future work.
 
 ## JOSH3R Demo
-Download the JOSH3R checkpoint from [this link](https://drive.google.com/file/d/1dlX4p1RfwFjuzjHr76SCl21QZAx1MLK4/view?usp=sharing) to $CKPT_PATH, then run the follows.
+Download the JOSH3R checkpoint from [this link](https://drive.google.com/file/d/1dlX4p1RfwFjuzjHr76SCl21QZAx1MLK4/view?usp=sharing) to `$CKPT_PATH`, and use the same `$input_folder` from the JOSH demo, then run the follows:
 ```
 python josh/inference_josh3r.py --input_folder "$input_folder" --ckpt_path $CKPT_PATH  --visualize
 ```
 Note that the scene reconstruction quality of JOSH3R may not be great due to the end-to-end inference of the base model MASt3R without optimization, 
 but the global human trajectory prediction should look more plausible. 
-## Evaluation
-To be updated before the ICLR conference
 
+## Evaluation
+```
+pip install evo # for camera pose evaluation
+```
+We provide evaluation scripts at `josh/eval` on all the datasets with basic instructions. Please refer to the original dataset repos for data downloading and processing. The scripts are not thoroughly tested, and feel free to open an issue if you encounter any problems or bugs.
 
 ## Acknowledgements
 We would like to thank the following projects for inspiring our work and open-sourcing their implementations:
