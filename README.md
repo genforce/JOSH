@@ -68,8 +68,11 @@ We provide evaluation scripts at `josh/eval` on all the datasets with basic inst
 ## Acknowledgements
 We would like to thank the following projects for inspiring our work and open-sourcing their implementations:
 
+
+
 Human Mesh Recovery: [WHAM](https://github.com/yohanshin/WHAM), [TRAM](https://github.com/yufu-wang/tram), [HMR2.0](https://github.com/shubham-goel/4D-Humans)
 
+Human Detection and Segmentation: [SAM3](https://github.com/facebookresearch/sam3/tree/main) 
 
 Scene Reconstruction: [DUSt3R](https://github.com/naver/dust3r?tab=readme-ov-file), [MASt3R](https://github.com/naver/mast3r), [Pi3](https://github.com/yyfz/Pi3)
 
